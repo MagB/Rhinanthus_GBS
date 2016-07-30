@@ -1,0 +1,65 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww20600\viewh10040\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 nanuq:\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1\fs32 \cf0 \expnd0\expndtw0\kerning0
+mbartkow\
+\
+
+\f0\fs24 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 How to log into the HPCVL:\
+\pard\pardeftab720\partightenfactor0
+\cf0 \expnd0\expndtw0\kerning0
+Username: \'a0hpc3461\
+Groupname: \'a0hpcg1496\
+Web Password: \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+      \
+\
+1. use their desktop login \
+https://portal.hpcvl.queensu.ca/sgd/index.jsp?langSelected=en\
+\
+2. use ssh:\
+Part 1: Log into the server: you\'92ll see that you are in the sflogin hpc3461@sflogin, this login brings you to a unix interface. \
+ ssh -X -l hpc3461 130.15.59.64\
+ \
+\
+Part2: log into swlogin1: now you\'92ll see you are in the slogan\
+  ssh swlogin1\
+\
+HOW to transfer files using FileZilla:\
+host:sftp://sfnode0.hpcvl.queensu.ca\
+username:hpc3461\
+no Port\
+\
+\
+\
+How to add programs to your bash_profile:\
+HPCVL has a bunch of programs already pre-installed. It is still necessary however to add them to your environment. \
+\
+the following command lists all programs available to you:\
+use -l\
+\
+Find the program you want and add it to your bash_profile\
+e.g.,  (I added instruct to my bash as follows)\
+if [ -r ~/.bashrc ]\
+then\
+  . ~/.bashrc\
+fi\
+\
+# put your own environment settings here, e.g.\
+# export PAGER=less\
+\
+# put "use" commands here to extend standard-user-settings\
+#\
+# e.g. uncomment next line to select specific package\
+# use fluent\
+\
+use instruct }

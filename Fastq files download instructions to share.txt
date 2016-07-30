@@ -1,0 +1,35 @@
+How to log into the HPCVL:
+
+
+1. use their desktop login 
+https://portal.hpcvl.queensu.ca/sgd/index.jsp?langSelected=en
+
+2. use ssh:
+
+Part 1: Log into the server: you’ll see that you are in the sflogin hpc3461@sflogin, this login brings you to a unix interface. 
+ ssh -X -l hpc3461 130.15.59.64
+ 
+
+Part2: log into swlogin1: now you’ll see you are in the slogan
+  ssh swlogin1
+
+ 
+
+Downloading data from McGill (note I removed my password, you must include your password):
+
+Navigate to the projects folder with the reads. Select the HiSeq Read Sets tab. Click on download read files. An automatically generated wget command will be available:
+
+wget -O - "genomequebec.mcgill.ca/nanuqMPS/readsetList?projectId=13193&tech=HiSeq" --no-cookies --no-check-certificate --post-data 'j_username=mbartkow&j_password=   ’ | wget --no-cookies --post-data 'j_username=mbartkow&j_password=    ' -ci - 
+
+
+This command failed for me despite adding the --no-check-certificate option.
+
+Instead of the -O option I tried the -U option:
+wget -U - "https://genomequebec.mcgill.ca/nanuqMPS/readsetList?projectId=13193&tech=HiSeq" --no-check-certificate --no-cookies --post-data 'j_username=mbartkow&j_password=xidufucm' | wget -O --no-check-certificate --no-cookies --post-data 'j_username=mbartkow&j_password= ' -ci - 
+
+This allowed me to download the list of reads. Then I could download each file individually.
+I obtained the full path address from the download list file and I used wget on each fastq file directly as follows:
+
+wget -U - "https://genomequebec.mcgill.ca/nanuqMPS/fileDownload/id/290566/type/READ_SET_FASTQ/filename/HI.3674.001.Ensing1_R1.fastq.gz" --no-check-certificate --no-cookies --post-data 'j_username=mbartkow&j_password= '
+
+wget -U - "https://genomequebec.mcgill.ca/nanuqMPS/fileDownload/id/290566/type/READ_SET_FASTQ/filename/HI.3674.001.Ensing1_R1.fastq.gz" --no-check-certificate --no-cookies --post-data 'j_username=mbartkow&j_password= '
