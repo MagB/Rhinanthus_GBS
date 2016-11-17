@@ -234,7 +234,7 @@ colnames(pairs)=c("pop1", "pop2", "shared_sites", "pop1_count", "pop2_count", "f
 pairs[grepl("Kob",pairs$pop1) | grepl("Kob",pairs$pop2) ,]
 
 #association between no samples at site and sample number
-sites_no_data=read.table(pipe('pbpaste') , header=F, sep="")
+sites_no_data=read.table("output/summary_stats/missing_sites_by_pop.txt", header=F, sep="")
 ggplot(sites_no_data, aes(x=V3, y=V2)) + geom_point()+
         theme( text = element_text(size=14),
                 panel.background = element_blank(),

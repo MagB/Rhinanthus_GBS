@@ -1,5 +1,7 @@
 library(ggplot2)
 
+#this script summarizes read lengths, read counts and the last section does sample depth
+
 #summarize read length count after demultiplexing:
 read_lengths=read.table("output/read_lenght_counts_post_ustack/read_length_count_by_sample2.txt",header=F, sep=" ")
 colnames(read_lengths)=c("read_count", "read_length", "sample_ID")

@@ -36,7 +36,7 @@ names(mygenos)
 #glPlot(mygenos36_scaff1, posi="topleft")
 
 pca1 <- glPca(mygenos)
-8#I chose to retain 4 axes. 
+#I chose to retain 4 axes. 
 pca1$eig
 pca1$scores
 pca1$loadings
@@ -91,7 +91,43 @@ for(i in tre$tip.label){
 tre$tip.label=paste(c(tre$tip.label),my_region_list, sep=" ")
 tre$tip.label=my_region_list
 
+#make a new region list where elevation is included in the name
+my_region_list2=c()
+for(i in tre$tip.label){
+        l= ifelse(grepl("Kd",i)==TRUE & grepl("H",i)==TRUE,"KdH", 
+                ifelse(grepl("Kd",i)==TRUE & grepl("M",i)==TRUE,"KdM",
+                        ifelse(grepl("Kd",i)==TRUE & grepl("L",i)==TRUE,"KdL",
+                ifelse(grepl("Kob",i)==TRUE & grepl("H",i)==TRUE,"KobH",
+                        ifelse(grepl("Kob",i)==TRUE & grepl("M",i)==TRUE,"KobM",
+                                ifelse(grepl("Kob",i)==TRUE & grepl("L",i)==TRUE,"KobL",
+                        ifelse(grepl("SS",i)==TRUE & grepl("H",i)==TRUE, "SSH",
+                                ifelse(grepl("SS",i)==TRUE & grepl("M",i)==TRUE, "SSM",
+                                        ifelse(grepl("SS",i)==TRUE & grepl("L",i)==TRUE, "SSL",
+                                ifelse(grepl("SP",i)==TRUE  & grepl("H",i)==TRUE, "SPH",
+                                        ifelse(grepl("SP",i)==TRUE  & grepl("M",i)==TRUE, "SPM",
+                                                ifelse(grepl("SP",i)==TRUE  & grepl("L",i)==TRUE, "SPL",
+                                        ifelse(grepl("APR",i)==TRUE & grepl("H",i)==TRUE, "APRH",
+                                                ifelse(grepl("APR",i)==TRUE & grepl("M",i)==TRUE, "APRM",
+                                                        ifelse(grepl("APR",i)==TRUE & grepl("L",i)==TRUE, "APRL",
+                                                ifelse(grepl("NkS",i)==TRUE & grepl("H",i)==TRUE, "NkSH",
+                                                        ifelse(grepl("NkS",i)==TRUE & grepl("M",i)==TRUE, "NkSM",
+                                                                ifelse(grepl("NkS",i)==TRUE & grepl("L",i)==TRUE, "NkSL",
+                                                        ifelse(grepl("NkN",i)==TRUE & grepl("H",i)==TRUE, "NkNH",
+                                                                ifelse(grepl("NkN",i)==TRUE & grepl("M",i)==TRUE, "NkNM",
+                                                                        ifelse(grepl("NkN",i)==TRUE & grepl("L",i)==TRUE, "NkNL",
+                                                                ifelse(grepl("HB",i)==TRUE & grepl("H",i)==TRUE, "HBHH",
+                                                                        ifelse(grepl("HB",i)==TRUE & grepl("M",i)==TRUE, "HBHM",
+                                                                                ifelse(grepl("HB",i)==TRUE & grepl("L",i)==TRUE, "HBHL",
+                                                                        ifelse(grepl("Ph",i)==TRUE & grepl("H",i)==TRUE, "PhM",
+                                                                                ifelse(grepl("Ph",i)==TRUE & grepl("M",i)==TRUE, "PhM",
+                                                                                        ifelse(grepl("Ph",i)==TRUE & grepl("L",i)==TRUE, "PhL",
+                                                                                ifelse(grepl("APK",i)==TRUE & grepl("H",i)==TRUE, "APKH",
+                                                                                        ifelse(grepl("APK",i)==TRUE & grepl("M",i)==TRUE, "APKM",
+                                                                                                ifelse(grepl("APK",i)==TRUE & grepl("L",i)==TRUE, "APKL",0))))))))))))))))))))))))))))))
+        my_region_list2=c(my_region_list2, l)
+}
 #HERE I START THE PLOTTING OF NJ AND PCA
+tre$tip.label=my_region_list2
 
 dev.off()
 quartz("new_fig", width=10, height=10)

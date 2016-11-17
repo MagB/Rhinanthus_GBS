@@ -1,5 +1,11 @@
 import sys
 
+#This script finds which populations have a representative sample at each site.
+#It first prints out for each population how many  sites are unique to this population and how many sites are called for each population
+
+#then for each populatoin it assesses which populaions do not co occur at any site. 
+
+
 file= open("/Users/Maggie/Documents/Rhinanthus/Python_scripts/summarized_sumstats_tsv.txt", 'r')
 
 #catalog=
@@ -47,11 +53,13 @@ count_sites=0
 
 #This prints the catalog and site ID along with all populations that have a genotype call for that site.
 #print "Catalog_ID", "Site_ID", "Populations"
-for catalog in pop_at_sites.keys():
-    for site in pop_at_sites[catalog].keys():
-        pop_at_sites[catalog][site].sort()
-        print catalog, site, " ".join(pop_at_sites[catalog][site])
-        count_sites+=1
+
+#Do not print this out unless you are searching for specific SNP sites
+#for catalog in pop_at_sites.keys():
+#    for site in pop_at_sites[catalog].keys():
+#        pop_at_sites[catalog][site].sort()
+#        print catalog, site, " ".join(pop_at_sites[catalog][site])
+#        count_sites+=1
         
         #counts number of each population at a site
         #[(i, pop_at_sites[catalog][site].count(i)) for i in set(pop_at_sites[catalog][site])] 
