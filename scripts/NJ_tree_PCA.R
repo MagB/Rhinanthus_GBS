@@ -133,19 +133,19 @@ dev.off()
 quartz("new_fig", width=10, height=10)
 nf <- layout(matrix(c(1,1,2,3), 2, 2, byrow=FALSE), respect=TRUE)
 layout.show(nf)
-par(oma=c(1,2,2,1))
+par(oma=c(1,2,2,2))
 par(mar=c(2,2,2,2))
 
 #first plot the NJ tree
 #I had used this object first, plot(tre, typ="phylogram",cex=0.81,label.offset=14)
 #Tree before rotation is tre
-plot(tre, typ="phylogram",cex=0.81,label.offset=14)
+plot(tre, typ="phylogram",cex=0.81,label.offset=8)
 
 
 #note: before running tiplabels run this line that appears below
 #to generate colors for each sample : myCol2 <- colorplot(pca1$scores[,2:3],pca1$scores[,2:3],transp=TRUE, cex=1, ylab="PCA3", xlab="PCA2")
 tiplabels(pch=15, col=myCol2, cex=1)
-mtext(side=3, line=-1, text="a)", adj=0, outer=T) 
+mtext(side=3, text="a)",line=-2, adj=0, outer=T) 
 
 
 #next plot PCA 1 vs 2 and 2 vs 3
@@ -163,7 +163,7 @@ mtext(side=3, text="b)", line=1, adj=-0.4)
 #myCol2 <- colorplot(pca1$scores[,2:3],pca1$scores[,2:3],transp=TRUE, cex=1, ylab="PCA3", xlab="PCA2")
 
 
-plot(pca1$scores[,3],pca1$scores[,2], col=myCol2, pch=19,transp=TRUE, cex=0.7,)
+plot(pca1$scores[,3],pca1$scores[,2], col=myCol2, pch=19,cex=0.7,)
 
 #text(pca1$scores[,3]~pca1$scores[,2], labels=rownames(pca1$scores), cex= 0.3, pos=pos_vector)
 abline(h=0,v=0, col="grey")
