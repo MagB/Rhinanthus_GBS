@@ -227,12 +227,6 @@ ggplot(pop_sites, aes(x = pop_codes, y = sites)) + geom_bar(stat = "identity") +
      #   ylim(0, 8000)+
         geom_hline(yintercept=5521)
 
-#pairs <- read.table(pipe('pbpaste'),header=F, sep="")
-
-colnames(pairs)
-colnames(pairs)=c("pop1", "pop2", "shared_sites", "pop1_count", "pop2_count", "fraction_pop1", "fraction_pop2")
-
-pairs[grepl("Kob",pairs$pop1) | grepl("Kob",pairs$pop2) ,]
 
 #association between no samples at site and sample number
 sites_no_data=read.table("output/summary_stats/missing_sites_by_pop.txt", header=F, sep="")
