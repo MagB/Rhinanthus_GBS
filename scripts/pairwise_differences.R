@@ -4,6 +4,7 @@ library(xlsx)
 library(dplyr)
 library(ggplot2)
 pairwise_differences=read.xlsx("output/summary_stats/pairwise_differences.xlsx", header=T, 1)
+pairwise_differences=read.csv("output/summary_stats/pairwise_differences.csv", header=T)
 
 head(pairwise_differences)
 str(pairwise_differences)

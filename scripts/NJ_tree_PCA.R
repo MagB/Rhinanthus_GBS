@@ -19,7 +19,7 @@ R.Version()
 search()
 ?"adegenet"
 mygenos=read.snp("output/snp_files/batch1.snp")
-
+class(mygenos)
 #alleles(mygenos36_scaff1)=rep("a/t", 417867)
 
 #You don't need populations for the glpca or the k-means. populations are required for doing a dpca and some other functions
