@@ -34,6 +34,8 @@ read_lengths[read_lengths$read_count>4035963,c(1,3)]
 
 file_list <- list.files(path="depth", pattern="*.txt", full.names=T, recursive=FALSE)
 i="depth/2015SPLo16.matches.tsv_depth.txt"
+#file_list is a list of files in the directory "depth". Each file is a distribution of the number of reads for each individual sample
+#the following loop, reads each file sequentially and calculates for each file the mean depth of that sample
 list_samp_mean={}
 for( i in file_list){
         
@@ -50,13 +52,10 @@ for( i in file_list){
        }  else{title_name=paste(i,samp_mean, sep=" " )}
        temp_plot=ggplot(temp_file, aes(x = depth, y = count)) + geom_bar(stat = "identity") +
                        theme(axis.text = element_text(size=14),text=element_text(size=15),
-                               axis.text=element_text(size=14), 
                                panel.background=element_blank(),  
                                axis.line = element_line(colour = "black"))+
-                       theme(axis.line.x = element_line(color="black"),
-                               axis.line.y = element_line(color="black"))+
                         xlab("Depth") + ylab("Count") +
-                       
+                   
                        scale_y_continuous(expand = c(0,0)) +
                        scale_x_continuous(limits=c(0,100), breaks=seq(0,100,by=10)) +
                         ggtitle(title_name)
@@ -72,7 +71,7 @@ summary(list_samp_mean$Depth)
 list_samp_mean$Depth=as.numeric(as.character(list_samp_mean$Depth))
 
 #Average depth after applying 80% genotype at site filter:
-samp_dep_filter=read.table("output/depth_80_percent_genotypes_at_site.txt", header=T, sep=" ")
+samp_dep_filter=read.table("depth/depth_80_percent_genotypes_at_site.txt", header=T, sep=" ")
 
 ggplot(samp_dep_filter, aes(x = Sample_ID, y = Avg_depth)) + geom_bar(stat = "identity") 
 
