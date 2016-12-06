@@ -2,6 +2,9 @@
 #To generate the PCA and the NJ tree I convert my snp data from a .summary file format to a .snp file format
 #the adegenet package and functions like pca require that snp data be converted into a genligth or gen object.
 
+#see this discussion
+#https://www.biostars.org/p/122359/
+
 #this is the path to an example of the .snp file format
 #file.show(system.file("files/exampleSnpDat.snp",package="adegenet"))
 # See this tutorial for details on this package
@@ -18,9 +21,15 @@ library(ape)
 R.Version() 
 search()
 ?"adegenet"
+#this batch1.snp file is for the first run of populaitons, I had no pop map. I required no filter apart from requiring 75% of samples being present at a site
+
 mygenos=read.snp("output/snp_files/batch1.snp")
 class(mygenos)
 #alleles(mygenos36_scaff1)=rep("a/t", 417867)
+
+#trying process again with a different filter of the data
+mygenos=read.snp("output/snp_files/batch1_no_pop_map_75_percent_sample_at_site.snp")
+
 
 #You don't need populations for the glpca or the k-means. populations are required for doing a dpca and some other functions
 #If pops are required be careful of how they are defined.
@@ -171,7 +180,7 @@ mtext(side=1, text='PCA3', cex=0.81, line=2)
 mtext(side=2, text='PCA2', cex=0.81, line=2)
 mtext(side=3, text="c)", line=1, adj=-0.4) 
 
-quartz.save("output/PCA_tree/PCA_tree_default_stacks2.pdf", type = "pdf", device = dev.cur(), dpi = 600)
+quartz.save("output/PCA_tree/PCA_tree_default_stacks_no_pop_map_75_percent_sample_at_site.pdf", type = "pdf", device = dev.cur(), dpi = 600)
 
 dev.off()
 

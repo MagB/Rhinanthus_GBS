@@ -6,18 +6,34 @@ library(ggplot2)
 read_lengths=read.table("output/read_lenght_counts_post_ustack/read_length_count_by_sample2.txt",header=F, sep=" ")
 colnames(read_lengths)=c("read_count", "read_length", "sample_ID")
 
+#how many reads were recovered in total?
+HI.3644.007.Ensing1_R1.fastq=169881729
+HI.3674.001.Ensing1_R1.fastq=169881729
+total_read_count=sum(HI.3644.007.Ensing1_R1.fastq,HI.3674.001.Ensing1_R1.fastq)
+total_read_count_after_demultiplexing=sum(read_lengths$read_count)
+total_read_count_after_demultiplexing/total_read_count
 
+#What's the max number of catalogs I expect to recover?
+total_read_count/(10*96)
+#353920.3 possible catalogs could be recovered assuming an average sample depth at a site of 10 reads, and
+#if each sample has 10 reads at a site then if the stacks for each sample merge into a stack I could recover around 
+#350K catalog sites. But some samples won't have overlaping catalogs. Some of these stacks and subsequent catalogs will be unusable
+
+
+
+#What % of reads are assigned to an individual following demultiplexing?
+total_read_count_after_demultiplexing/total_read_count
 
 ggplot(read_lengths, aes(x = sample_ID, y = read_count)) + geom_bar(stat = "identity") +
-        theme(axis.text = element_text(size=14),text=element_text(size=15),
-                axis.text=element_text(size=14), 
+        theme(axis.text = element_text(size=24),text=element_text(size=24),
+                axis.text.x=element_blank(),
                 panel.background=element_blank(),  
                 axis.line = element_line(colour = "black"))+
-        theme(axis.line.x = element_line(color="black"),
-                axis.line.y = element_line(color="black"))+
-        xlab("Sample") + ylab("Read count") +
+      #  theme(axis.line.x = element_line(color="black"),
+       #         axis.line.y = element_line(color="black"))+
+        xlab("Sample") + ylab("Read count (millions of reads)") +
         scale_y_continuous(expand = c(0,0)) +
-        ggtitle("Average read number per sample following demultiplexing" )
+       # ggtitle("Average read number per sample following demultiplexing" )
 
 new_name=paste(i,".pdf", sep="")
 
@@ -25,6 +41,15 @@ new_name=paste(i,".pdf", sep="")
 #Average number of reads per individual
 mean(read_lengths$read_count, na.rm =T)
 summary(read_lengths$read_count,digits=max(10, getOption("digits")))
+
+#What is the CV of read counts? 
+#CV is a good measure because it is unitless and independent of the mean, thereby making it comparable across studies with different units
+#or for comparisons in studies with widely different means. 
+CV <- function(average, stand_dev){
+        (stand_dev/average)
+}
+
+CV(average = mean(read_lengths$read_count), stand_dev=sd(read_lengths$read_count))
 
 #samples in the lowest quantile
 read_lengths[read_lengths$read_count<2523975,c(1,3)]
