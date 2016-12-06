@@ -8,7 +8,7 @@ colnames(read_lengths)=c("read_count", "read_length", "sample_ID")
 
 ggplot(read_lengths, aes(x = sample_ID, y = read_count)) + geom_bar(stat = "identity") +
         theme(axis.text = element_text(size=14),text=element_text(size=15),
-                axis.text=element_text(size=14), 
+                #axis.text=element_text(size=14), 
                 panel.background=element_blank(),  
                 axis.line = element_line(colour = "black"))+
         theme(axis.line.x = element_line(color="black"),
@@ -30,7 +30,7 @@ read_lengths[read_lengths$read_count<2523975,c(1,3)]
 #samples is highest quantile
 read_lengths[read_lengths$read_count>4035963,c(1,3)]
 
-file_list <- list.files(path="depth", pattern="*.txt", full.names=T, recursive=FALSE)
+file_list <- list.files(path="depth", pattern="*.txt", full.names=T, recursive=FALSE) ####**** this isn't working ****####
 i="depth/2015SPLo16.matches.tsv_depth.txt"
 list_samp_mean={}
 for( i in file_list){
@@ -47,12 +47,10 @@ for( i in file_list){
        
        }  else{title_name=paste(i,samp_mean, sep=" " )}
        temp_plot=ggplot(temp_file, aes(x = depth, y = count)) + geom_bar(stat = "identity") +
-                       theme(axis.text = element_text(size=14),text=element_text(size=15),
-                               axis.text=element_text(size=14), 
+                       theme(axis.text = element_text(size=14),text=element_text(size=15), 
                                panel.background=element_blank(),  
                                axis.line = element_line(colour = "black"))+
-                       theme(axis.line.x = element_line(color="black"),
-                               axis.line.y = element_line(color="black"))+
+                      
                         xlab("Depth") + ylab("Count") +
                        
                        scale_y_continuous(expand = c(0,0)) +
@@ -64,6 +62,7 @@ for( i in file_list){
 
        list_samp_mean=rbind(list_samp_mean,c(sample_name2[2], samp_mean))
 }
+
 list_samp_mean=as.data.frame(list_samp_mean)
 colnames(list_samp_mean)=c("Sample_ID", "Depth")
 summary(list_samp_mean$Depth)
@@ -72,7 +71,9 @@ list_samp_mean$Depth=as.numeric(as.character(list_samp_mean$Depth))
 #Average depth after applying 80% genotype at site filter:
 samp_dep_filter=read.table("output/depth_80_percent_genotypes_at_site.txt", header=T, sep=" ")
 
-ggplot(samp_dep_filter, aes(x = Sample_ID, y = Avg_depth)) + geom_bar(stat = "identity") 
+ggplot(samp_dep_filter, aes(x = Sample_ID, y = Avg_depth)) + 
+	geom_bar(stat = "identity") +
+	theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Dave added this line to be able to see the sample labels.
 
 summary(samp_dep_filter$Avg_depth)
 
