@@ -1,5 +1,5 @@
 # Rhinanthus GBS project
 
-#Currently using the program stacks to call SNPs and do pop genome analyses.
+#Currently, we are using the stacks pipeline created by the Catchen lab to call SNPs (http://catchenlab.life.illinois.edu/stacks/).
 
-#This README will be updated shortly.
+#The data represents Illumina Sequence Data obtained for a reduced representation genomic library sequenced at McGill.
